@@ -9,6 +9,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UsersController {
     @Autowired
@@ -18,8 +20,8 @@ public class UsersController {
     UsersService usersService;
 
     @GetMapping("/users")
-    public void getAllUsers(){
-        usersService.getAllUsers();
+    public List<Users> getAllUsers(){
+        return usersService.getAllUsers();
     }
 
     @GetMapping("/users/{id}")
@@ -37,19 +39,17 @@ public class UsersController {
         } catch (Exception e) {
             return usersService.createUser(user);
         }
-
     }
 
     @PutMapping("/users/{id}")
     @CacheEvict(value = "users",key = "#users.id")
-    public Users editUsers(@RequestBody Users users, @PathVariable String id){
+    public Users editUsers(@RequestBody Users users, @PathVariable("id") String id){
        return usersService.editUser(users,id);
     }
 
     @DeleteMapping("/users/{id}")
-    @CacheEvict(value = "users",key = "#users.id")
-    public Boolean deleteUsers(@PathVariable String id){
-        return usersService.deleteUser(id);
+    public boolean deleteUsers(@PathVariable("id") String id){
+         return usersService.deleteUser(id);
     }
 
 }

@@ -10,7 +10,7 @@ public interface UsersService {
 
     Users editUser (Users user,String id);
 
-    Boolean deleteUser (String id);
+    boolean deleteUser (String id);
 
 
     List<Users> getAllUsers ();

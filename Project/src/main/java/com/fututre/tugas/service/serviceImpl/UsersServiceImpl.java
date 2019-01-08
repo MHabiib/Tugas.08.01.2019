@@ -30,20 +30,19 @@ public class UsersServiceImpl  implements UsersService {
     @Override
     public Users editUser(Users newUser, String id) {
         Users user = usersRepository.findOne(id);
-        user.setUsername(newUser.getUsername());
         user.setRole(newUser.getRole());
         user.setPassword((newUser.getPassword()));
         return usersRepository.save(user);
     }
 
     @Override
-    public Boolean deleteUser(String id) {
-        Users userExist=usersRepository.findOne(id);
-        if (userExist==null){
+    public boolean deleteUser(String id) {
+        Users user = usersRepository.findOne(id);
+        if(user!=null) {
             usersRepository.delete(id);
-            return true;}
-        else
-            return false;
+            return true;
+        }
+        else return false;
     }
 
     @Override

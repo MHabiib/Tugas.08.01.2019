@@ -8,42 +8,47 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
     <link th:href="@{/css/main.css}" rel="stylesheet"></link>
     <link th:href="@{/css/simple-sidebar.css}" rel="stylesheet"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
-<div id="wrapper">
-    <div th:replace="sidebar :: sidebar-fragment">&nbsp;</div>
+    <div id="wrapper">
+        <div th:replace="sidebar :: sidebar-fragment">&nbsp;</div>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <a th:href="@{/member/}">Create New Member</a>
-            <table id="member-table" class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="member : ${members}">
-                    <td scope="row">
-                        <a th:href="@{'/member/' + ${member.id}}" th:text="${member.username}"></a>
-                    </td>
-                    <td th:text="${member.email}"></td>
-                    <td th:text="${member.role}"></td>
-                    <td>
-                        <form action="#" th:action="@{'/member/' + ${member.id}}" th:method="delete" >
-                            <input type="submit" name="_method" value="Delete" />
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div>
+                    <input type="text" class="input100" name="username" placeholder="username" id="username"/>
+                    <input type="password" class="input100"  name="password" id="password"
+                           placeholder="Password" required="true"/>
+                    <select class="form-control" id="roleUser" >
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                        <option value="ROLE_USER">USER</option>
+                    </select>
+                    <button  id="updateUser" class="btn btn-info">Save</button><button id="saveUser" class="btn btn-success">Create New User</button>
+
+                </div>
+                <table id="member-table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="userTable">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+    <script src="js/main.js"></script>
 </body>
+
 </html>
