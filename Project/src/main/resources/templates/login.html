@@ -4,27 +4,41 @@
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/util.css" />
+    <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
-<div class="box">
-    <div class="logo">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-90">
+            <form name="login" th:action="@{/login}"  method="post">
+                <!--<fieldset>-->
+                    <p>
+                        Please enter your username and password to login
+                    </p>
+                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <input type="text" class="input100" name="username" id="username" placeholder="Username" required="true" autofocus="true"/>
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+                <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
+                    <input type="password" class="input100"  name="password" id="password"
+                           placeholder="Password" required="true"/>
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+                <!--<button id="login" type="submit" class="btn btn-success" value="Log In">Sign In</button>-->
+                <div class="container-login100-form-btn m-t-20">
+                    <button id="login" class="login100-form-btn" value="Log In">
+                        Sign in
+                    </button>
+                </div>
+                <!--</fieldset>-->
+            </form>
+            </div>
+        </div>
     </div>
-    <div class="login-form">
-        <form name="login" th:action="@{/login}"  method="post">
-            <fieldset>
-                <p>
-                    Please enter your username and password to login
-                </p>
-                <input type="text" name="username" id="username"
-                       placeholder="Username" required="true" autofocus="true"/>
-                <input type="password" name="password" id="password"
-                       placeholder="Password" required="true"/>
-                <button id="login" type="submit" class="btn-login" value="Log In">Sign In</button>
-            </fieldset>
-        </form>
-    </div>
-</div>
 </body>
+<script src="js/login.js"></script>
+
 </html>

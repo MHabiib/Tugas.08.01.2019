@@ -20,7 +20,6 @@ function validate (input) {
     if($(input).val().trim() == ''){
         return false;
     }
-
 }
 
 function showValidate(input) {
@@ -35,7 +34,10 @@ function hideValidate(input) {
     $(thisAlert).removeClass('alert-validate');
 }
 
+
+
 $("#login").click(function () {
     validateInput();
-})
+}
+
 
