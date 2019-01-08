@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("manager")
+                .antMatchers("/user/**").hasRole("user")
                 .anyRequest().authenticated()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
                 .and()
@@ -42,6 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder()).and()
                 .inMemoryAuthentication()
                 .withUser("habib").password("habib123").roles("admin").and()
-                .withUser("anthony").password("anthony456").roles("manager");
+                .withUser("anthony").password("anthony456").roles("user");
     }
 }

@@ -1,41 +1,54 @@
-<!DOCTYPE HTML>
-<!-- https://pastebin.com/NVgj1hcN-->
-
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/main.css}" rel="stylesheet"></link>
-</head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    </head>
+<body>
 
-<body class="form-container">
-<form th:action="@{/login}" method="post">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<div class="limiter">
+<div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-90">
+        <!--<form class="login100-form validate-form">-->
+					<span class="login100-form-title p-b-33">
+						Account Login
+					</span>
 
-    <div th:if="${param.error}">
-        <div class="alert alert-danger">
-            Invalid username and password.
-        </div>
-    </div>
-    <div th:if="${param.logout}">
-        <div class="alert alert-info">
-            You have been logged out.
-        </div>
-    </div>
+            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <input id="email" class="input100" type="text" name="email" placeholder="Email">
+                <span class="focus-input100-1"></span>
+                <span class="focus-input100-2"></span>
+            </div>
 
-    <div class="form-group">
-        <label for="username" class="sr-only">Username</label>
-        <input type="username" id="username" name="username" class="form-control" placeholder="Username" required="true" autofocus="true"></input>
+            <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
+                <input id="password" class="input100" type="password" name="pass" placeholder="Password">
+                <span class="focus-input100-1"></span>
+                <span class="focus-input100-2"></span>
+            </div>
+
+            <div class="container-login100-form-btn m-t-20">
+                <button id="login" class="login100-form-btn">
+                    Sign in
+                </button>
+            </div>
+
+
     </div>
-    <div class="form-group">
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true"></input>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </div>
-</form>
+</div>
+</div>
+
+<script type="text/javascript" src="js/cookies.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+
+
+
 </body>
 </html>
