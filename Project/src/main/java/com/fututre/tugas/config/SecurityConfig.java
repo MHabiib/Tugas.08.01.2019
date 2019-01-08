@@ -7,19 +7,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    MongoUserDetailService userDetailService;
-
+    private MongoUserDetailService userDetailsService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("user")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
                 .and()
@@ -36,12 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Autowired
-    public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder()).and()
-                .inMemoryAuthentication()
-                .withUser("habib").password("habib123").roles("admin").and()
-                .withUser("anthony").password("anthony456").roles("user");
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
