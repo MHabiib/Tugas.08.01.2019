@@ -1,3 +1,4 @@
+/*
 package com.fututre.tugas.error;
 
 
@@ -38,3 +39,4 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 
     }
 }
+*/
