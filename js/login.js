@@ -44,7 +44,7 @@ function hideValidate(input) {
 
 
 $("#login").click(function () {
-    if(validateInput()){
+    // if(validateInput()){
         var login = {
             email: $("#email").val(),
             password : $("#password").val()
@@ -53,7 +53,7 @@ $("#login").click(function () {
         console.log(loginJSON);
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/api/login',
+            url: 'http://localhost:8080/login',
             data: loginJSON,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
@@ -65,8 +65,11 @@ $("#login").click(function () {
             error: function (error) {
                 console.log("cookie not saved");
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-                alert("email/password does not exist");
-            }
+                $(".input100").parent().addClass("alert-validate");
+                // alert("email/password does not exist");
+                
+
+            // }
         });
     }
 });
