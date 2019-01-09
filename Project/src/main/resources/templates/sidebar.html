@@ -1,12 +1,15 @@
 <div id="sidebar-wrapper" th:fragment="sidebar-fragment">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
-                Daftar User bulanan
+            <a  th:href="@{/about}">
+                Daftar Member
             </a>
         </li>
         <li>
-            <a th:href="@{/home}">Users</a>
+            <a th:href="@{/admin}">Admin Page</a>
+        </li>
+        <li>
+            <a th:href="@{/user}">User Page</a>
         </li>
         <li>
             <a th:href="@{/logout}">Logout</a>

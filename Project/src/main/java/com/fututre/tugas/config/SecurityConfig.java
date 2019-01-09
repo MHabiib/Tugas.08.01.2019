@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/").permitAll()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/home/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
@@ -31,16 +32,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
 //                .failureUrl("/login.html?error=true")
                 .permitAll()
+                .defaultSuccessUrl("/")
                 .and()
-                .logout();
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .permitAll();
         http.httpBasic();
         http.csrf().disable();
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/static/**");
+//    }
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -33,6 +33,7 @@ function getAllUsers(){
     });
 }
 function editUser(userId){
+    $("#userModal").modal();
     $.ajax({
         type: 'GET',
         url: "http://localhost:8080/users/"+userId,
@@ -71,7 +72,10 @@ function editUser(userId){
                 data: data,
                 dataType: "json",
                 success: function (data) {
-                    if (data != null) alert("Successed:\nuser Updated!");
+                    if (data != null) {
+                        alert("Successed:\nuser Updated!");
+                        getAllUsers();
+                    }
                     else alert("Error:\nfailed to update User!");
                 },
                 error: function (error) {
@@ -95,8 +99,11 @@ function deleteUser(userId){
         dataType:"json",
         success: function (data) {
             if(data==false) alert("Error:\nFailed to delete user!");
-            else alert("Successed:\nUser deleted!");
-        },
+            else {
+                alert("Successed:\nUser deleted!");
+                getAllUsers();
+            }
+            },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
             alert(error.status+"\nSome error occurred, failed to delete user");
@@ -105,6 +112,9 @@ function deleteUser(userId){
 }
 getAllUsers();
 
+$("#addUser").click(function (e) {
+    $("#userModal").modal();
+});
 $("#saveUser").unbind().click( function(e) {
         e.preventDefault();
         var user = {
@@ -122,11 +132,21 @@ $("#saveUser").unbind().click( function(e) {
         data: data,
         dataType: "json",
         success: function (data) {
-            if(data){ alert("Successed\nUser created!");}
+            if(data){
+                alert("Successed\nUser created!");
+                    getAllUsers();
+            }
             else {alert("Failed to create user!")}
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
     });
+});
+
+$("#addUser").click(function (e) {
+    e.preventDefault();
+    $("#username").val("");
+    $("#password").val("");
+    $("#userModal").modal();
 });

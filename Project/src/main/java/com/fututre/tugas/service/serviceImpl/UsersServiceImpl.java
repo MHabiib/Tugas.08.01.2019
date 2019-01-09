@@ -20,11 +20,13 @@ public class UsersServiceImpl  implements UsersService {
     UsersRepository usersRepository;
 
     @Override
-    public Users createUser(Users user) {
+    public boolean createUser(Users user) {
         Users userExist=usersRepository.findByUsername(user.getUsername());
-        if (userExist==null)
-            return usersRepository.save(user);
-        else return null;
+        if (userExist==null) {
+            usersRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -43,6 +45,11 @@ public class UsersServiceImpl  implements UsersService {
             return true;
         }
         else return false;
+    }
+
+    @Override
+    public Users findOneBy(String id) {
+        return usersRepository.findOne(id);
     }
 
     @Override
